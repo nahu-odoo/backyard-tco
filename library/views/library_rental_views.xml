@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="library_rental_view_tree" model="ir.ui.view">
+        <field name="name">library.rental.view.tree</field>
+        <field name="model">library.rental</field>
+        <field name="arch" type="xml">
+            <tree string="Rental">
+                <field name="user"/>
+                <field name="book"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="library_rental_action" model="ir.actions.act_window">
+        <field name="name">Rental</field>
+        <field name="res_model">library.rental</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

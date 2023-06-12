@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="library_book_view_tree" model="ir.ui.view">
+        <field name="name">library.book.view.tree</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <tree string="Book">
+                <field name="name"/>
+                <field name="isbn" string="ISBN"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="library_book_action" model="ir.actions.act_window">
+        <field name="name">Book</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
