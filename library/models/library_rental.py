@@ -1,4 +1,5 @@
-from odoo import fields, models
+from odoo import api, fields, models
+from dateutil.relativedelta import relativedelta
 
 class Rental(models.Model):
     _name = "library.rental"
@@ -8,3 +9,24 @@ class Rental(models.Model):
     # book = fields.Char()
     book = fields.Many2one("library.book")
     date = fields.Date()
+    due_date = fields.Date()
+    overdue_fine = fields.Float(compute="_compute_overdue_fine")
+
+    @api.depends('overdue_fine')
+    def _compute_overdue_fine(self):
+        today = fields.Date.today()
+        for rec in self:
+            if rec.due_date and rec.due_date < today:
+                rec.overdue_fine = (today - rec.due_date).days * 10
+            else:
+                rec.overdue_fine = 0
+
+    @api.model
+    def create(self, vals):
+        vals['date'] = fields.Date.today()
+        vals['due_date'] = fields.Date.today() + relativedelta(months=1)
+        return super().create(vals)
+
+    def search_rentals(self):
+        today = fields.Date.today()
+        return self.search([('due_date', '>', today)], order='due_date desc')
