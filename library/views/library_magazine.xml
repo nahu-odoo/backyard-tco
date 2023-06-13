@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="library_magazine_inherit_library" model="ir.ui.view">
+        <field name="name">library.magazine.view.form.inherit</field>
+        <field name="model">library.magazine</field>
+        <field name="inherit_id" ref="library_book_view_tree"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="issue_date"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="library_magazine_action" model="ir.actions.act_window">
+        <field name="name">Magazine</field>
+        <field name="res_model">library.magazine</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

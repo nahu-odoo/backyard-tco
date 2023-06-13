@@ -18,4 +18,10 @@
         action="library_rental_action"
         parent="library_menu"/>
 
+    <menuitem
+        id="library_magazine_menu"
+        name="Magazine"
+        action="library_magazine_action"
+        parent="library_menu"/>
+
 </odoo>

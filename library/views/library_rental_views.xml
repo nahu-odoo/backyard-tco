@@ -6,7 +6,7 @@
         <field name="model">library.rental</field>
         <field name="arch" type="xml">
             <tree string="Rental">
-                <field name="user"/>
+                <field name="user_id"/>
                 <field name="book"/>
             </tree>
         </field>
