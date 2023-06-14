@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="library_rental_view_form" model="ir.ui.view">
+        <field name="name">library.rental.view.form</field>
+        <field name="model">library.rental</field>
+        <field name="arch" type="xml">
+            <form string="Rental">
+                <header>
+                    <field name="state" widget="statusbar" readonly="0"/>
+                    <button string="Return Book" name="return_book" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'returned')]}"/>
+                </header>
+                <sheet string="Rental">
+                    <group>
+                        <group string="Rental Info">
+                            <field name="user_id"/>
+                            <field name="book"/>
+                            <field name="date"/>
+                        </group>
+                        <group string="Penalty">
+                            <field name="due_date"/>
+                            <field name="overdue_fine" class="text-danger" attrs="{'invisible': [('overdue_fine', '=', 0)]}"/>
+                            <field name="overdue_fine" attrs="{'invisible': [('overdue_fine', '>', 0)]}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
     <record id="library_rental_view_tree" model="ir.ui.view">
         <field name="name">library.rental.view.tree</field>

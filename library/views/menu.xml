@@ -24,4 +24,11 @@
         action="library_magazine_action"
         parent="library_menu"/>
 
+    <menuitem
+        id="book_search_wizard_menu"
+        name="Search Book"
+        action="library_book_search_wizard_action"
+        parent="library_menu"
+        />
+
 </odoo>

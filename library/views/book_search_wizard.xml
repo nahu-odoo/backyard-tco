@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="library_book_search_wizard" model="ir.ui.view">
+        <field name="name">library.book.search.wizard</field>
+        <field name="model">book.search.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Search Book">
+                <group>
+                    <field name="book_name"/>
+                </group>
+                <footer>
+                    <button string="Search" name="action_search" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="library_book_search_wizard_action" model="ir.actions.act_window">
+        <field name="name">Search Book</field>
+        <field name="res_model">book.search.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

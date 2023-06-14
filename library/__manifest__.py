@@ -8,6 +8,7 @@
         "views/library_book_views.xml",
         "views/library_rental_views.xml",
         "views/library_magazine.xml",
+        "views/book_search_wizard.xml",
         "views/res_partner.xml",
         "views/menu.xml",
     ],

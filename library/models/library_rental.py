@@ -7,10 +7,11 @@ class Rental(models.Model):
     # user = fields.Char()
     user_id = fields.Many2one('res.partner')
     # book = fields.Char()
-    book = fields.Many2one("library.book")
+    book = fields.Many2one("library.book", required=True)
     date = fields.Date()
     due_date = fields.Date()
     overdue_fine = fields.Float(compute="_compute_overdue_fine")
+    state = fields.Selection([('borrow', 'Borrowed'), ('returned', 'Returned')], default="borrow")
 
     @api.depends('overdue_fine')
     def _compute_overdue_fine(self):
@@ -30,3 +31,11 @@ class Rental(models.Model):
     def search_rentals(self):
         today = fields.Date.today()
         return self.search([('due_date', '>', today)], order='due_date desc')
+
+    def return_book(self):
+        self.state = 'returned'
+
+    @api.depends('user_id', 'book')
+    def _compute_display_name(self):
+        for rental in self:
+            rental.display_name = '%s - %s' % (rental.user_id.name, rental.book.name)
