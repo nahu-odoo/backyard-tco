@@ -11,5 +11,6 @@
         "views/book_search_wizard.xml",
         "views/res_partner.xml",
         "views/menu.xml",
+        "views/report_library_rental.xml",
     ],
 }
