@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="template_book" name="Books">
+        <t t-call="web.html_container">
+            Available books: <span t-out="len(books)"/>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>ISBN</th>
+                        <th>Summary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="books" t-as="book">
+                        <tr>
+                            <td><span t-esc="book.name"/></td>
+                            <td><span t-esc="book.isbn"/></td>
+                            <td><span t-esc="book.summary"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </t>
+    </template>
+
+</odoo>

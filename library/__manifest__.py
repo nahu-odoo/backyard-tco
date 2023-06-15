@@ -16,5 +16,6 @@
         "views/res_partner.xml",
         "views/menu.xml",
         "views/report_library_rental.xml",
+        "views/templates.xml",
     ],
 }
