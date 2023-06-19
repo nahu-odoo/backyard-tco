@@ -10,10 +10,10 @@ class Rental(models.Model):
     book = fields.Many2one("library.book", required=True)
     date = fields.Date()
     due_date = fields.Date()
-    overdue_fine = fields.Float(compute="_compute_overdue_fine")
+    overdue_fine = fields.Float(compute="_compute_overdue_fine", store="True")
     state = fields.Selection([('borrow', 'Borrowed'), ('returned', 'Returned')], default="borrow")
 
-    @api.depends('overdue_fine')
+    @api.depends('due_date')
     def _compute_overdue_fine(self):
         today = fields.Date.today()
         for rec in self:

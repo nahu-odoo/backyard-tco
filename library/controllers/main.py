@@ -23,3 +23,17 @@ class Controllers(http.Controller):
             data[user.name] = [{'book': r.book.name, 'overdue': r.overdue_fine} for r in rents]
 
         return request.make_response(json.dumps(data), headers=headers)
+
+    @http.route('/fines')
+    def fines(self, **kw):
+        today = datetime.datetime.today()
+        fines_grouped = request.env['library.rental'].read_group([('due_date', '<', today)], ['overdue_fine'], ['user_id'])
+        data = {}
+        for user in fines_grouped:
+            data[user['user_id'][0]] = user['overdue_fine']
+        return request.make_response(json.dumps(data), headers={"Content-Type": "application/json"})
+
+    @http.route('/overdue')
+    def overdue(self, **kw):
+        overdue = request.env['library.rental'].search([], order='overdue_fine desc', limit=1)
+        return request.make_response(str(overdue.overdue_fine))
