@@ -4,8 +4,8 @@
     "depends": ['contacts'],
     'application': True,
     'data': [
-        "security/ir.model.access.csv",
         "security/res_groups.xml",
+        "security/ir.model.access.csv",
         "security/ir_rule.xml",
         # The order of file being loaded is ipmortant
         "views/library_book_views.xml",
