@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="sale_web" name="Sale Website">
+        <t t-call="web.html_container">
+            <div class="container-fluid">
+                <h1>Sale <span t-out="order.name" /></h1>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Order Lines</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="order.order_line" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <t t-out="line.product_id.name" />
+                                        </td>
+                                        <td>
+                                            <t t-out="line.product_uom_qty" />
+                                        </td>
+                                        <td>
+                                            <t t-out="line.price_unit" />
+                                        </td>
+                                        <td>
+                                            <t t-out="line.price_subtotal" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
