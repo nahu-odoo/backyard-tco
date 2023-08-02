@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_template_inherit_training" model="ir.ui.view">
+        <field name="name">product.template.view.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='detailed_type']" position="after">
+                <field name="min_age" />
+            </xpath>
+            <xpath expr="//field[@name='image_1920']" position="before">
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    attrs="{'invisible': [('min_age','&lt;=',18)]}"
+                >
+                    <strong>CHECK FOR CUSTOMER AGE BEFORE SELLING</strong>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
