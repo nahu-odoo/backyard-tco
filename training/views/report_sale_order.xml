@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_saleorder_document" name="Sales Report" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//th[@name='th_description']" position="before">
+            <th>Number</th>
+        </xpath>
+        <xpath expr="//t[@t-foreach='lines_to_report']" position="before">
+            <t t-set="index" t-value="1"/>
+        </xpath>
+        <xpath expr="//td[@name='td_name']" position="before">
+            <td><span t-esc="index"/></td>
+            <t t-set="index" t-value="index+1"/>
+        </xpath>
+    </template>
+</odoo>

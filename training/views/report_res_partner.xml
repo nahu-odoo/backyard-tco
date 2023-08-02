@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_res_partner_age">
+        <t t-call="web.html_container">
+            <div>Count Underage: <t t-out="len(docs.filtered(lambda p: p.age and p.age &lt; 18))" /></div>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th />
+                </tr>
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="doc" t-value="o" />
+                    <tr>
+                        <t t-set="is_underage" t-value="doc.age and doc.age &lt; 18" />
+                        <td t-out="doc.name" />
+                        <td t-out="doc.age or '-'" />
+                        <td t-out="'UNDERAGE' if is_underage else ''"
+                            t-att-style="'background: red; color: white;' if is_underage else ''" />
+                    </tr>
+                </t>
+            </table>
+        </t>
+    </template>
+
+    <!-- <template id="report_table_age_header">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th/>
+        </tr>
+    </template>
+
+    <template id="report_table_age_row">
+        <tr>
+            <t t-set="is_underage" t-value="doc.age and doc.age &lt; 18"/>
+            <td t-out="doc.name"/>
+            <td t-out="doc.age or '-'"/>
+            <td t-out="'UNDERAGE' if is_underage else ''"
+                t-att-style="'background: red; color: white;' if is_underage else ''"/>
+        </tr>
+    </template>
+
+
+    <template id="report_res_partner_age">
+        <t t-call="web.html_container">
+            <div>Count Underage: <t t-out="len(docs.filtered(lambda p: p.age and p.age &lt; 18))"/></div>
+            <table class="table">
+                <t t-call="training.report_table_age_header"/>
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="doc" t-value="o"/>
+                    <t t-call="training.report_table_age_row"/>
+                </t>
+            </table>
+        </t>
+    </template> -->
+
+    <record id="action_partner_age_report" model="ir.actions.report">
+        <field name="name">Ages Report</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">training.report_res_partner_age</field>
+        <field name="binding_model_id" ref="base.model_res_partner" />
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="report_res_partner_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <table class="table">
+                        <tr>
+                            <th>Sale Order</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                        </tr>
+                        <tbody>
+                            <tr t-foreach="o.sale_order_ids.sorted(lambda x: x.amount_total, reverse=True)" t-as="order">
+                                <td><span t-field="order.name"/></td>
+                                <td><span t-field="order.date_order"/></td>
+                                <td><span t-field="order.amount_total"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_partner_sale_report" model="ir.actions.report">
+        <field name="name">Sale Report</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">training.report_res_partner_report</field>
+        <field name="binding_model_id" ref="base.model_res_partner" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
