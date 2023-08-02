@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="car_car_view_tree" model="ir.ui.view">
+        <field name="name">car.car.view.tree</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+            <tree string="Car">
+                <field name="name" />
+                <field name="brand" />
+                <field name="production_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="car_car_view_form" model="ir.ui.view">
+        <field name="name">car.car.view.form</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="add_miles" type="object" string="Add Miles"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Vox"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="production_date" />
+                            <field name="user_id" domain="[('is_company', '=', False)]"/>
+                        </group>
+                        <group>
+                            <field name="brand" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="name" string="Other Information">
+                            <group>
+                                <field name="price" />
+                                <field name="miles" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="car_car_action" model="ir.actions.act_window">
+        <field name="name">Car</field>
+        <field name="res_model">car.car</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="car_car_menu"
+        name="Car"
+        action="car_car_action"
+    />
+</odoo>
