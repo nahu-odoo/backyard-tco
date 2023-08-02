@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Actions -->
+    <record id="action_car" model="ir.actions.act_window">
+        <field name="name">Cars</field>
+        <field name="res_model">car.car</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Root Menu -->
+    <menuitem
+        id="menu_car"
+        name="Car"
+        sequence="1"/>
+
+    <!-- Car Menu -->
+    <menuitem
+        id="car_menu"
+        name="Cars"
+        action="action_car"
+        parent="menu_car"
+        sequence="1"/>
+
+    <!-- Defining Our Tree View For Car -->
+    <record id="view_car_car_tree" model="ir.ui.view">
+        <field name="name">car.car.tree</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+            <tree string="Cars">
+                <field name="name" />
+                <field name="brand" />
+                <field name="production_date" />
+                <field name="mileage" />
+                <field name="price" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Defining Our Form View For Car -->
+    <record id="view_car_car_form" model="ir.ui.view">
+        <field name="name">car.car.form</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+            <form edit="1">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="car_details_left">
+                            <field name="brand" />
+                            <field name="mileage" />
+                            <field name="price" />
+                        </group>
+                        <group name="car_details_right">
+                            <field name="production_date" />
+                            <field name="rented" />
+                            <field name="picture" widget="image"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
